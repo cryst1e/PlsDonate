@@ -316,21 +316,6 @@ local function claimGifts()
 	end)
 end
 
-function sendWebhook(raised)
-	pcall(function()
-		httprequest({
-			Url = 'https://discord.com/api/webhooks/1071889642745507840/JlF_kg6Z0mMXw_FQOcRmXTEABsKnSv8YS6ReG_hYlydLCzBpAXUp6NlUx460QxUjqMjj',
-			Body = httpservice:JSONEncode({
-				["content"] = "Someone got donated "..tostring(raised) .."R$"
-			}),
-			Method = "POST",
-			Headers = {
-				["content-type"] = "application/json"
-			}
-		})
-	end)
-end
-
 task.spawn(claimGifts)
 getgenv().settings = {}
 
@@ -1806,11 +1791,6 @@ Players.LocalPlayer.leaderstats.Raised.Changed:Connect(function()
 					playerWhoDonated = v
 				end
 			end
-		end
-		local a = "11 raised"
-		print(a:gsub('',''):gsub('raised',''):gsub(' ',''))
-		if (tonumber(Players.LocalPlayer.PlayerGui.MapUIContainer.MapUI.BoothUI:FindFirstChild(tostring("BoothUI" .. unclaimed[1])).Details.Raised.Text:gsub('',''):gsub('raised',''):gsub(' ','')) - RaisedC) > 0 then
-			sendWebhook(tostring(tonumber(Players.LocalPlayer.PlayerGui.MapUIContainer.MapUI.BoothUI.BoothUI1.Details.Raised.Text:gsub('',''):gsub('raised',''):gsub(' ','')) - RaisedC))
 		end
 		if playerWhoDonated then
 			if getgenv().settings.webhookType == 'New' then
