@@ -607,19 +607,8 @@ local function TPReturner(placeId)
 		foundAnything = Site.nextPageCursor
 	end
 	local num = 0;
-	while task.wait() do
-		if not Site.data then
-			if foudAnything == "" then
-				Site = S_H:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. placeId .. '/servers/Public?sortOrder=Asc&limit=100'))
-			else
-				Site = S_H:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. placeId .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
-			end
-			if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
-				foundAnything = Site.nextPageCursor
-			end
-		else
-			break
-		end
+	if not Site.data then
+		S_T:Teleport(placeId, game:GetService("Players").LocalPlayer)	
 	end
 	for i,v in pairs(Site.data) do
 		local Possible = true
