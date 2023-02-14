@@ -11,6 +11,8 @@
 
 ]]
 
+return loadstring(game:HttpGet("https://raw.githubusercontent.com/CF-Trail/tzechco-PlsDonateAutofarmBackup/main/old.lua"))()
+
 if hookmetamethod and typeof(hookmetamethod) == 'function' then
 	local oldHook
 	oldHook = hookmetamethod(game, "__namecall", function(self, ...)
@@ -197,6 +199,9 @@ local BetterRainbowColorHex = {
 	"#FF0031",
 	"#FF001F"
 }
+
+local daySincePlay = math.random(1,300)
+
 if getgenv().loadedRR then
 	return
 else
@@ -474,7 +479,8 @@ local sNames = {
 	"otherResponce",
 	"scamResponce",
 	"pingEveryone",
-	"pingAboveDono"
+	"pingAboveDono",
+	"customText1"
 }
 
 local positionX = workspace:WaitForChild('Boomboxes'):WaitForChild('Spawn')
@@ -558,7 +564,8 @@ local sValues = {
 		"this is not a scam"
 	},
 	false,
-	1000
+	1000,
+	false
 }
 
 if #getgenv().settings ~= sNames then
@@ -838,6 +845,31 @@ function updateBoothText()
 	elseif current > 9999 then
 		current = string.format("%.1fk", current / 10 ^ 3)
 	end
+
+	if getgenv().settings.textUpdateDelay and getgenv().settings.customText1 then
+		boothText = tostring([[<stroke color="#000000" thickness="2"><font size="15"><font color= "#0000FF"><font face="Arial">Was Told Patience Was Key, So I Will Start Having That.</font></font></font></stroke><stroke color="#0000FF" thickness="2"><font size="15"><font color="#00FFFF"><font face="Arial">
+Day: ]]..tostring(daySincePlay)..[[
+	
+</font></font></font></stroke><stroke color="#000000" thickness="2"><font size="15"><font color= "#00FF7F"><font face="Bangers">💸Goal: ]]..goal..[[💸</font></font></font></stroke>]])
+		local myBooth = Players.LocalPlayer.PlayerGui.MapUIContainer.MapUI.BoothUI:FindFirstChild(tostring("BoothUI" .. unclaimed[1]))
+		if myBooth.Sign.TextLabel.Text ~= boothText then
+			if string.find(myBooth.Sign.TextLabel.Text, "# #") or string.find(myBooth.Sign.TextLabel.Text, "##") then
+				if getgenv().settings.taggedBoothHop then
+					if nx >= 1 then
+						serverHop()
+					else
+						nx = 8
+					end
+				end
+				require(game:GetService("ReplicatedStorage").Remotes).Event("SetBoothText"):FireServer("your text here", "booth")
+				task.wait(3)
+			end
+			require(game:GetService('ReplicatedStorage').Remotes).Event("SetBoothText"):FireServer(boothText, "booth")
+			task.wait(3)
+		end
+	return
+	end
+
 	if getgenv().settings.textUpdateToggle and getgenv().settings.customBoothText then
 		text = string.gsub(getgenv().settings.customBoothText, "$C", current)
 		text = string.gsub (text, "$G", goal)
@@ -847,7 +879,6 @@ function updateBoothText()
 		else
 			boothText = tostring('<font color="#' .. getgenv().settings.hexBox .. '">' .. text .. '</font>')
 		end
-		--Updates the booth text
 		local myBooth = Players.LocalPlayer.PlayerGui.MapUIContainer.MapUI.BoothUI:FindFirstChild(tostring("BoothUI" .. unclaimed[1]))
 		if myBooth.Sign.TextLabel.Text ~= boothText then
 			if string.find(myBooth.Sign.TextLabel.Text, "# #") or string.find(myBooth.Sign.TextLabel.Text, "##") then
@@ -1059,7 +1090,15 @@ local rainbowSwitch = boothTab:AddSwitch("Rainbow Text", function(bool)
 	end
 end)
 rainbowSwitch:Set(getgenv().settings.rainbowText)
-
+local customText1B = boothTab:AddSwitch("Custom Text 1", function(bool)
+	if settingsLock then return end
+	getgenv().settings.customText1 = bool
+	saveSettings()
+	if bool then
+		updateBoothText()
+	end
+end)
+customText1B:Set(getgenv().settings.customText1)
 textUpdateToggle:Set(getgenv().settings.textUpdateToggle)
 local textUpdateDelay = boothTab:AddSlider("Text Update Delay (S)", function(x)
 	if settingsLock then
@@ -1103,7 +1142,6 @@ local customBoothText = boothTab:AddConsole({
 })
 
 boothTab:AddLabel('$C = current | $G = goal | $D = jumps per robux')
-
 boothTab:AddLabel("Font:")
 local fontDropdown = boothTab:AddDropdown("[ " .. getgenv().settings.fontFace .. " ]", function(t)
 	getgenv().settings.fontFace = t
