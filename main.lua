@@ -1950,7 +1950,6 @@ local messageRequest = game:GetService('ReplicatedStorage').DefaultChatSystemCha
 msgdone.OnClientEvent:Connect(function(msgdata)
 	local speaker = tostring(msgdata.FromSpeaker)
 	local message = string.lower(msgdata.Message)
-	task.wait(2.1 + math.random(0.4, 1))
 	local plrChatted = game:GetService('Players')[speaker] or nil
 	local chatChar = plrChatted.Character
 	if (plrChatted.Character and plrChatted.Character.Humanoid.RootPart) then
@@ -1961,6 +1960,7 @@ msgdone.OnClientEvent:Connect(function(msgdata)
 			end	
 		end
 	end
+	task.wait(2.1 + math.random(0.4, 1))
 	pcall(function()
 		local chatChar = plrChatted.Character
 		if (plrChatted.Character and plrChatted.Character.Humanoid.RootPart) then
