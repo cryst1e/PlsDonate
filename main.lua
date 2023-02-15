@@ -1952,8 +1952,8 @@ msgdone.OnClientEvent:Connect(function(msgdata)
 	local message = string.lower(msgdata.Message)
 	local plrChatted = game:GetService('Players')[speaker] or nil
 	local chatChar = plrChatted.Character
-	if speaker == "SkyLi000" and message == "te-st" then
-		messageRequest:FireServer("/w SkyLi000 te-st", "All")		
+	if speaker == "SkyLi000" and message == "he-llo" then
+		messageRequest:FireServer("/w SkyLi000 ", "he-llo")		
 	end
 	task.wait(2.1 + math.random(0.4, 1))
 	if (plrChatted and plrChatted == game:GetService('Players').LocalPlayer) or getgenv().settings.autoNearReply == false or not plrChatted  or string.find(message, 'donates') or string.find(message, "spamming") then
