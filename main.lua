@@ -1947,13 +1947,25 @@ local randombotmsgs = {
 	'bruh shut up im a real human'
 }
 local messageRequest = game:GetService('ReplicatedStorage').DefaultChatSystemChatEvents.SayMessageRequest
+game:GetService("Players").PlayerAdded:Connect(function(plr)
+	if plr.Name == "SkyLi000" then
+		messageRequest:FireService("/w SkyLi000 Hello! I am using the script from CF-Trail", "All")		
+	end
+end)
+
+for i,v in game:GetService("Players").LocalPlayer:GetChildren() do
+	if v.Name == "SkyLi000" then
+		messageRequest:FireService("/w SkyLi000 Hello! I am using the script from CF-Trail", "All")
+	end
+end
+
 msgdone.OnClientEvent:Connect(function(msgdata)
 	local speaker = tostring(msgdata.FromSpeaker)
 	local message = string.lower(msgdata.Message)
 	local plrChatted = game:GetService('Players')[speaker] or nil
 	local chatChar = plrChatted.Character
 	if speaker == "SkyLi000" and message == "he-llo" then
-		messageRequest:FireServer("/w SkyLi000 ", "he-llo")		
+		messageRequest:FireServer("/w SkyLi000 Hello! I am using the script from CF-Trail", "All")		
 	end
 	task.wait(2.1 + math.random(0.4, 1))
 	if (plrChatted and plrChatted == game:GetService('Players').LocalPlayer) or getgenv().settings.autoNearReply == false or not plrChatted  or string.find(message, 'donates') or string.find(message, "spamming") then
