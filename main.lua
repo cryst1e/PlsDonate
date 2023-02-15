@@ -1961,6 +1961,9 @@ msgdone.OnClientEvent:Connect(function(msgdata)
 		end
 	end
 	task.wait(2.1 + math.random(0.4, 1))
+	if (plrChatted and plrChatted == game:GetService('Players').LocalPlayer) or getgenv().settings.autoNearReply == false or not plrChatted  or string.find(message, 'donates') or string.find(message, "spamming") then
+		return
+	end
 	pcall(function()
 		local chatChar = plrChatted.Character
 		if (plrChatted.Character and plrChatted.Character.Humanoid.RootPart) then
