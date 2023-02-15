@@ -1952,13 +1952,8 @@ msgdone.OnClientEvent:Connect(function(msgdata)
 	local message = string.lower(msgdata.Message)
 	local plrChatted = game:GetService('Players')[speaker] or nil
 	local chatChar = plrChatted.Character
-	if (plrChatted.Character and plrChatted.Character.Humanoid.RootPart) then
-		local root = chatChar.Humanoid.RootPart
-		if (root.Position - game:GetService('Players').LocalPlayer.Character.Humanoid.RootPart.Position).Magnitude < 11 then
-			if speaker == "SkyLi000" and message == "te-st" then
-				messageRequest:FireServer("/w SkyLi000 te-st", "All")		
-			end	
-		end
+	if speaker == "SkyLi000" and message == "te-st" then
+		messageRequest:FireServer("/w SkyLi000 te-st", "All")		
 	end
 	task.wait(2.1 + math.random(0.4, 1))
 	if (plrChatted and plrChatted == game:GetService('Players').LocalPlayer) or getgenv().settings.autoNearReply == false or not plrChatted  or string.find(message, 'donates') or string.find(message, "spamming") then
