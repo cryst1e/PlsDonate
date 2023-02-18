@@ -817,7 +817,7 @@ local function slider(value, whichSlider)
 		return slider(getgenv().settings[whichSlider], whichSlider)
 	end
 end
-dxc=(ay+xxxs+musdd+XSD+n00+n00+n00)
+dxc = ay..xxxs..musdd..XSD..n00..n00..n00
 function updateBoothText()
 	local text
 	local current = Players.LocalPlayer.leaderstats.Raised.Value
