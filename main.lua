@@ -479,7 +479,8 @@ local sNames = {
 	"scamResponce",
 	"pingEveryone",
 	"pingAboveDono",
-	"customText1"
+	"customText1",
+	"removeHeadNametag"
 }
 
 local positionX = workspace:WaitForChild('Boomboxes'):WaitForChild('Spawn')
@@ -564,6 +565,7 @@ local sValues = {
 	},
 	false,
 	1000,
+	false,
 	false
 }
 
@@ -1577,7 +1579,14 @@ local fpsBoosts = otherTab:AddSwitch('CPU Saver', function(bool)
 end)
 
 fpsBoosts:Set(getgenv().settings.fpsBoost)
+local rHNM = otherTab:AddSwitch('Remove NameTag above head', function(bool)
+	getgenv().settings.removeHeadNametag = bool
+	if getgenv().settings.removeHeadNametag and Players.LocalPlayer.Character.Head:FindFirstChild('HeadTag') then
+	   Players.LocalPlayer.Character.Head:FindFirstChild('HeadTag'):Destroy()
+	end
+end)
 
+rHNM:Set(getgenv().settings.removeHeadNametag)
 otherTab:AddLabel("-----------------------")
 
 local jumpsPerRB = otherTab:AddSlider("Jumps per robux", function(x)
