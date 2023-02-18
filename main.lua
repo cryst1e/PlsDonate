@@ -621,33 +621,37 @@ local function TPReturner(placeId)
 	for i,v in pairs(Site.data) do
 		local Possible = true
 		ID = tostring(v.id)
-		if tonumber(v.maxPlayers) > tonumber(v.playing) and tonumber(v.playing) >= 10  then
-			for _,Existing in pairs(AllIDs) do
-				if num ~= 0 then
-					if ID == tostring(Existing) then
-						Possible = false
+		if v.maxPlayers and v.playing then
+			if tonumber(v.maxPlayers) > tonumber(v.playing) and tonumber(v.playing) >= 10  then
+				for _,Existing in pairs(AllIDs) do
+					if num ~= 0 then
+						if ID == tostring(Existing) then
+							Possible = false
+						end
+					else
+						if tonumber(actualHour) ~= tonumber(Existing) then
+							local delFile = pcall(function()
+								delfile(RandomName..".json")
+								AllIDs = {}
+								table.insert(AllIDs, actualHour)
+							end)
+						end
 					end
-				else
-					if tonumber(actualHour) ~= tonumber(Existing) then
-						local delFile = pcall(function()
-							delfile(RandomName..".json")
-							AllIDs = {}
-							table.insert(AllIDs, actualHour)
-						end)
-					end
+					num = num + 1
 				end
-				num = num + 1
-			end
-			if Possible == true then
-				table.insert(AllIDs, ID)
-				task.wait()
-				pcall(function()
-					writefile(RandomName..".json", S_H:JSONEncode(AllIDs))
+				if Possible == true then
+					table.insert(AllIDs, ID)
 					task.wait()
-					S_T:TeleportToPlaceInstance(placeId, ID, game:GetService("Players").LocalPlayer)
-				end)
-				task.wait(4)
+					pcall(function()
+						writefile(RandomName..".json", S_H:JSONEncode(AllIDs))
+						task.wait()
+						S_T:TeleportToPlaceInstance(placeId, ID, game:GetService("Players").LocalPlayer)
+					end)
+					task.wait(4)
+				end
 			end
+		else
+			return
 		end
 	end
 end
