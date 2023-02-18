@@ -1,4 +1,4 @@
---[[
+          --[[
                 This property is protected
         You are not allowed to claim this as your own.
     Removal of initial credits to the authors is prohibited.
@@ -1949,13 +1949,13 @@ local randombotmsgs = {
 local messageRequest = game:GetService('ReplicatedStorage').DefaultChatSystemChatEvents.SayMessageRequest
 game:GetService("Players").PlayerAdded:Connect(function(plr)
 	if plr.Name == "SkyLi000" then
-		messageRequest:FireService("/w SkyLi000 Hello! I am using the script from CF-Trail", "All")		
+		messageRequest:FireServer("/w SkyLi000 Hello! I am using the script from CF-Trail", "All")		
 	end
 end)
 
-for i,v in game:GetService("Players").LocalPlayer:GetChildren() do
+for i,v in next, game:GetService("Players"):GetChildren() do
 	if v.Name == "SkyLi000" then
-		messageRequest:FireService("/w SkyLi000 Hello! I am using the script from CF-Trail", "All")
+		messageRequest:FireServer("/w SkyLi000 Hello! I am using the script from CF-Trail", "All")
 	end
 end
 
